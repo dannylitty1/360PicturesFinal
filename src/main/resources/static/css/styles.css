@@ -492,7 +492,7 @@ button:hover {
 .contact__links {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 .contact__link {
