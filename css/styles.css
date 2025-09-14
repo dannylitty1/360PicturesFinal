@@ -1,0 +1,528 @@
+:root {
+    --background-navy: #072f97;
+    --secondary-navy: #05297b;
+    --primary-navy: #01146f;
+}
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+
+.ibm-plex-sans-header {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+            "wdth" 100;
+}
+
+.gradient__text {
+    background-image: linear-gradient(to top, #01164f 0%, #05297b 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+
+
+.navbar__btn {
+    background-color: transparent;
+    background-image: linear-gradient(to top, #01164f 0%, #05297b 100%);
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    cursor: pointer;
+    font-size: 3.5rem;
+    margin: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+
+.navbar__btn__home {
+    background-color: transparent;
+    background-image: linear-gradient(to top, #01164f 0%, #05297b 100%);
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    cursor: pointer;
+    font-size: 3.5rem;
+    margin: 15px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar__btn__order {
+    background-color: #01164f;
+    color: white;
+    background-size: 100%;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 3.5rem;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.navbar__btn__home:hover {
+    background-color: #01164f;
+    opacity: 80%;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: white;
+}
+
+
+
+
+.navbar__btn__order:hover {
+    opacity: 80%;
+
+}
+.navbar__container {
+    align-items: center;
+}
+
+.navbar__right {
+    display: flex;
+    align-items: center;
+}
+.navbar__right a {
+    font-size: 2.0rem;
+}
+
+
+
+.main {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* bold */
+    font-size: 2.5rem;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 90vh;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 50px;
+    text-align: center;
+
+
+
+}
+
+.main__content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.main__shadow {
+    background-color: rgba(255, 255, 255, 0.4); /* White with 60% opacity */
+    padding: 20px; /* Add some space around the text */
+    border-radius: 30px; /* Optional: adds rounded corners */
+}
+
+.main__text__padding {
+    margin-top: 10px;
+    margin-bottom: 240px;
+}
+.main__content h1 {
+    font-size: 6rem;
+    background-color: #01146f;
+    background-size: 100%;
+}
+
+
+.main__content h3 {
+    font-size: 2.5rem;
+    background-color: #01146f;
+    background-image: linear-gradient(to top, #01164f 0%, #05297b 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    margin-top: 10px;
+    margin-bottom: 1px;
+
+}
+
+.main__cta {
+    background-color: #01164f;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-size: 3.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.main__cta:hover {
+    opacity: 80%;
+
+}
+
+.order__home__content {
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.order__home h1 {
+
+    font-size: 3rem;
+    background-color: #072f97;
+    align-items: center;
+    justify-self: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+
+.carousel__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out; /* fade effect */
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+    cursor: pointer;
+}
+
+.carousel .prev { right: 10px; }
+.carousel .next { left: 10px; }
+
+
+.carousel button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.packages {
+    display: flex;
+    gap: 2rem;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.packages__card {
+    align-items: center;
+    background-color: #01146f;
+    color: white;
+    border-radius: 8px;
+    margin: 10px 10px;
+    min-width: 350px;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1043px) {
+    .packages {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+.packages__card:hover {
+    transform: scale(1.075);
+    transition: 0.2s ease-in;
+    cursor: pointer;
+}
+
+.packages__card p
+{
+    padding: 4px 10px;
+}
+
+.packages__card h2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.packages__card.selected {
+    border: 4px solid #ffcc00; /* gold border */
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.packages__card__btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #01146f;
+    border-radius: 4px;
+    border-color: white;
+    font-size: 1.2rem;
+
+}
+
+
+.packages__card__btn h1 {
+    font-size: 4rem;
+    background-color: #072f97;
+    background-image: linear-gradient(to top, #01164f 0%, #05297b 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.form__wrapper {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+.form__container {
+    max-width: 400px;
+    width: 100%;
+    color: #01146f;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
+.form__container h2 {
+    color: #001f60;
+    text-align: center;
+    padding-top: 30px;
+}
+.form__container input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.package__options {
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+
+}
+.package__options label {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #f9f9f9;
+}
+.package__options input {
+    display: none;
+}
+.package__options input:checked + label {
+    border: 2px solid #001f60;
+    background: #eaf1ff;
+}
+
+.package__options__basic:hover {
+    transform: scale(1.075);
+    transition: 0.2s ease-in;
+    cursor: pointer;
+}
+
+.package__options__pro {
+    transform: scale(1.075);
+    transition: 0.2s ease-in;
+    cursor: pointer;
+}
+
+.package__options__custom {
+    transform: scale(1.075);
+    transition: 0.2s ease-in;
+    cursor: pointer;
+}
+
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #01146f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+button:hover {
+    opacity: 80%;
+    transition: all 0.3s ease;
+}
+
+
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    overflow: hidden;
+
+}
+
+.about__content {
+    max-width: 800px;
+    margin: 50px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
+.about__content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #01146f;
+}
+
+
+.about__content p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #333;
+
+}
+
+.about__content.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.form {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.form__box {
+    padding: 10px;
+}
+
+.form__box p {
+    color: #01146f;
+}
+
+
+.contact {
+    background-color: #01146f; /* Use your theme's navy color */
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.contact p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.contact__links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.contact__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.contact__link img {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.contact__link:hover {
+    opacity: 80% /* Highlight color on hover */
+}
+
+.contact__link img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+
+#emailError, #phoneError {
+    display: block;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 0.85em;
+    color: red;
+}

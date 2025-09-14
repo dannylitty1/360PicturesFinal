@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Orders</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar__left">
+        <a href="index.html" class="navbar__btn">
+            <img src="images/360PicturesNavyLogo.png" alt="PIC360 Logo" width="100" height="100">
+            <!--<a href="index.html" class="navbar__btn">360Pictures</a>-->
+        </a>
+    </div>
+
+    <div class="navbar__right">
+        <a href="index.html" class="navbar__btn__home">Home</a>
+        <a href="orders.html" class="navbar__btn__order">Order Now</a>
+    </div>
+</nav>
+
+<div class="carousel__wrapper">
+    <div class="carousel">
+        <button class="prev">&#10095;</button>
+        <img id="carouselImage" src="" alt="house photo">
+        <button class="next">&#10094;</button>
+    </div>
+</div>
+
+
+<script>
+    let photos = [];            // will be filled from JSON
+    let currentIndex = 0;
+    let intervalId;
+    const img = document.getElementById("carouselImage");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const carousel = document.querySelector(".carousel");
+
+    function showImage(index) {
+        if (photos.length === 0) return;
+        if (index < 0) index = photos.length - 1;
+        if (index >= photos.length) index = 0;
+
+        currentIndex = index;
+        img.src = photos[currentIndex];
+        // Fade out
+        img.style.opacity = 0;
+
+        setTimeout(() => {
+            currentIndex = index;
+            img.src = photos[currentIndex];
+            // Fade in
+            img.style.opacity = 1;
+        }, 300); // small delay before switching image
+
+    }
+
+    function nextImage() {
+        showImage(currentIndex + 1);
+    }
+
+    function prevImage() {
+        showImage(currentIndex - 1);
+    }
+
+    function startAutoSlide() {
+        intervalId = setInterval(nextImage, 6000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(intervalId);
+    }
+
+    nextBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        nextImage();
+        startAutoSlide();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        prevImage();
+        startAutoSlide();
+    });
+
+    // Pause on hover
+    carousel.addEventListener("mouseenter", stopAutoSlide);
+    carousel.addEventListener("mouseleave", () => {
+        setTimeout(startAutoSlide, 3000); // resume after 3s
+    });
+
+    // Fetch images from photos.json
+    fetch("photos.json")
+        .then(response => response.json())
+        .then(data => {
+            photos = data.photos;       // assumes { "photos": ["img1.jpg", "img2.jpg", ...] }
+            showImage(0);               // show first image
+            startAutoSlide();           // start autoplay
+        })
+        .catch(error => console.error("Error loading json:", error));
+</script>
+
+<div class="order__home">
+    <div class="order__home__content">
+        <h1 class="gradient__text">Order Real Estate Photography</h1>
+        <p class="gradient__text" style="font-size: 1.9rem; padding-bottom: 20px;">Choose a package and fill out the form below to get started!</p>
+        <div class="packages">
+            <div class="packages__card" data-package="Basic">
+                <h2>Basic</h2>
+                <p>Up to 2000 Square Ft</p>
+                <p>Up to 20 photos</p>
+                <p style="padding-bottom: 20px;">Edited with 48 hour turnaround</p>
+            </div>
+            <div class="packages__card" data-package="Pro">
+                <h2>Pro</h2>
+                <p>Up to 4000 Square Ft</p>
+                <p>Up to 35 Photos with additional if requested</p>
+                <p style="padding-bottom: 20px;">Edited with 48 hour turnaround</p>
+            </div>
+            <div class="packages__card" data-package="Custom">
+                <h2>Custom</h2>
+                <p>4000+ Square Ft</p>
+                <p>35 Photos with additional if requested</p>
+                <p style="padding-bottom: 20px;">Edited with 48 hour turnaround</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form__wrapper">
+    <div class="form__container">
+        <h2 class="gradient__text">Place an Order</h2>
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="4da2a17d-cea9-4ab9-bed3-031e11a69e61">
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="example@example.com" required>
+            <input type="tel" name="phone" placeholder="(555) 555-5555" required>
+
+            <div class="package__options">
+                <input class="package__options__basic" type="radio" id="basic" name="package" value="Basic" required>
+                <label for="basic">Basic</label>
+
+                <input class="package__options__pro" type="radio" id="pro" name="package" value="Pro">
+                <label for="pro">Pro</label>
+
+                <input class="package__options__custom" type="radio" id="custom" name="package" value="Custom">
+                <label for="custom">Custom</label>
+            </div>
+
+            <button type="submit">Submit →</button>
+            <input type="hidden" name="redirect" value="https://www.360-pictures.com/orders">
+        </form>
+    </div>
+</div>
+
+<script>
+    const cards = document.querySelectorAll('.packages__card');
+    const packageInput = document.getElementById('packageInput');
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            // if this card is already selected → unselect it
+            if (card.classList.contains('selected')) {
+                card.classList.remove('selected');
+                packageInput.value = ""; // clear hidden input
+                return;
+            }
+
+            // otherwise → clear others and select this one
+            cards.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            packageInput.value = card.getAttribute('data-package');
+
+            console.log("Selected package:", packageInput.value); // debug
+        });
+    });
+</script>
+<script>
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+
+    emailInput.addEventListener("input", function()
+    {
+        const regex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (emailInput.value === "" || regex.test(emailInput.value))
+        {
+            emailInput.style.border = "";          // reset to default
+            emailError.style.display = "none";     // hide error
+        }
+        else
+        {
+            emailInput.style.border = "2px solid red";  // show red border
+            emailError.style.display = "block";         // show error
+        }
+    });
+
+    const phoneInput = document.getElementById("phone");
+    const phoneError = document.getElementById("phoneError");
+
+    phoneInput.addEventListener("input", function()
+    {
+        const regex = /^\+?[0-9]{7,15}$/;
+        if (phoneInput.value === "" || regex.test(phoneInput.value))
+        {
+            phoneInput.style.border = "";          // reset to default
+            phoneError.style.display = "none";     // hide error
+        }
+        else
+        {
+            phoneInput.style.border = "2px solid red";  // show red border
+            phoneError.style.display = "block";         // show error
+        }
+    });
+</script>
+
+</body>
+</html>
