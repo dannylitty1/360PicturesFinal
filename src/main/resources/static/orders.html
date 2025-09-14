@@ -25,17 +25,18 @@
 
 <div class="carousel__wrapper">
     <div class="carousel">
-        <button class="prev">&#10095;</button>
+        <button class="prev">&#10094;</button>
         <img id="carouselImage" src="" alt="house photo">
-        <button class="next">&#10094;</button>
+        <button class="next">&#10095;</button>
     </div>
 </div>
 
-
 <script>
-    let photos = [];            // will be filled from JSON
+    let photos = [];
     let currentIndex = 0;
-    let intervalId;
+    let intervalId = null;
+    let resumeTimeoutId = null;
+
     const img = document.getElementById("carouselImage");
     const prevBtn = document.querySelector(".prev");
     const nextBtn = document.querySelector(".next");
@@ -43,21 +44,18 @@
 
     function showImage(index) {
         if (photos.length === 0) return;
+
         if (index < 0) index = photos.length - 1;
         if (index >= photos.length) index = 0;
 
         currentIndex = index;
-        img.src = photos[currentIndex];
-        // Fade out
+
+        // fade transition
         img.style.opacity = 0;
-
         setTimeout(() => {
-            currentIndex = index;
             img.src = photos[currentIndex];
-            // Fade in
             img.style.opacity = 1;
-        }, 300); // small delay before switching image
-
+        }, 200);
     }
 
     function nextImage() {
@@ -69,11 +67,19 @@
     }
 
     function startAutoSlide() {
+        stopAutoSlide(); // ensure only ONE interval
         intervalId = setInterval(nextImage, 6000);
     }
 
     function stopAutoSlide() {
-        clearInterval(intervalId);
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+        if (resumeTimeoutId) {
+            clearTimeout(resumeTimeoutId);
+            resumeTimeoutId = null;
+        }
     }
 
     nextBtn.addEventListener("click", () => {
@@ -91,16 +97,17 @@
     // Pause on hover
     carousel.addEventListener("mouseenter", stopAutoSlide);
     carousel.addEventListener("mouseleave", () => {
-        setTimeout(startAutoSlide, 3000); // resume after 3s
+        stopAutoSlide();
+        resumeTimeoutId = setTimeout(startAutoSlide, 3000);
     });
 
-    // Fetch images from photos.json
+    // Fetch images
     fetch("photos.json")
         .then(response => response.json())
         .then(data => {
-            photos = data.photos;       // assumes { "photos": ["img1.jpg", "img2.jpg", ...] }
-            showImage(0);               // show first image
-            startAutoSlide();           // start autoplay
+            photos = data.photos;
+            showImage(0);
+            startAutoSlide();
         })
         .catch(error => console.error("Error loading json:", error));
 </script>

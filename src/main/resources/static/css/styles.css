@@ -254,8 +254,8 @@
     cursor: pointer;
 }
 
-.carousel .prev { right: 10px; }
-.carousel .next { left: 10px; }
+.carousel .prev { left; 10px; }
+.carousel .next { right: 10px; }
 
 
 .carousel button:hover {
