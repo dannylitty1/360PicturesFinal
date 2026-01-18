@@ -35,7 +35,6 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #ffffff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -421,9 +420,6 @@ button:hover {
 .about {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     padding: 50px 20px;
     background-color: white;
     overflow: hidden;
@@ -450,6 +446,8 @@ button:hover {
     font-size: 1.5rem;
     line-height: 1.8;
     color: #333;
+    text-align: left;
+    width: 100%;
 
 }
 
