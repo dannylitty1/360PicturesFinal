@@ -402,6 +402,18 @@
         }
 
         /* Responsive */
+
+        @media (min-width: 769px) and (max-width: 1100px) {
+            .about__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about__card:nth-child(3) {
+                grid-column: 1 / -1;
+                justify-self: center;
+            }
+        }
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
