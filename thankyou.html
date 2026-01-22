@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - 360Pictures</title>
+    <link rel="icon" type="image/png" href="images/faviconBlackTransparentAI.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-primary: #0a2463;
+            --navy-secondary: #1e3a8a;
+            --navy-light: #3b5998;
+            --gray-blue: #64748b;
+            --gray-blue-light: #94a3b8;
+            --gray-blue-lighter: #cbd5e1;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --shadow: rgba(10, 36, 99, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px var(--shadow);
+        }
+
+        .navbar__container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar__logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar__logo img {
+            width: 60px;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar__logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar__menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .navbar__link {
+            text-decoration: none;
+            color: var(--navy-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .navbar__link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--navy-secondary);
+            transition: width 0.3s ease;
+        }
+
+        .navbar__link:hover::after {
+            width: 100%;
+        }
+
+        .navbar__cta {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(10, 36, 99, 0.3);
+        }
+
+        .navbar__cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(10, 36, 99, 0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--navy-primary);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .menu-close {
+            display: none;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: var(--navy-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .menu-close:hover {
+            background: var(--navy-secondary);
+            transform: rotate(90deg);
+        }
+
+        /* Thank You Section */
+        .thankyou {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--off-white) 0%, white 50%, var(--off-white) 100%);
+        }
+
+        .thankyou__container {
+            max-width: 800px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .thankyou__icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 20px 60px rgba(10, 36, 99, 0.3);
+            animation: scaleIn 0.6s ease 0.3s both;
+        }
+
+        .thankyou__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .thankyou__message {
+            font-size: 1.25rem;
+            color: var(--gray-blue);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .thankyou__submessage {
+            font-size: 1.1rem;
+            color: var(--gray-blue-light);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .thankyou__card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin: 3rem 0;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .thankyou__card h3 {
+            font-size: 1.5rem;
+            color: var(--navy-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .thankyou__card p {
+            color: var(--gray-blue);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .thankyou__actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .thankyou__button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .thankyou__button--primary {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(10, 36, 99, 0.3);
+        }
+
+        .thankyou__button--primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(10, 36, 99, 0.4);
+        }
+
+        .thankyou__button--secondary {
+            background: white;
+            color: var(--navy-primary);
+            border: 2px solid var(--navy-primary);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .thankyou__button--secondary:hover {
+            transform: translateY(-3px);
+            background: var(--navy-primary);
+            color: white;
+            box-shadow: 0 6px 25px rgba(10, 36, 99, 0.3);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .contact__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact__links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact__link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact__link:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact__link img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .contact__link:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .navbar__menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                gap: 2rem;
+                box-shadow: -5px 0 20px var(--shadow);
+                transition: right 0.3s ease;
+            }
+
+            .navbar__menu.active {
+                right: 0;
+            }
+
+            .navbar__menu.active ~ .menu-close {
+                display: flex;
+            }
+
+            .menu-close {
+                display: none;
+                position: fixed;
+            }
+
+            .thankyou {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .thankyou__icon {
+                width: 100px;
+                height: 100px;
+                font-size: 3rem;
+            }
+
+            .thankyou__actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .thankyou__button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact__links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar__container {
+                padding: 1rem;
+            }
+
+            .navbar__logo span {
+                font-size: 1.25rem;
+            }
+
+            .navbar__logo img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .thankyou__card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__logo">
+                <img src="images/360PicturesNavyLogo.png" alt="360Pictures Logo">
+                <span>360 Pictures</span>
+            </a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="navbar__menu" id="navMenu">
+                <a href="index.html" class="navbar__link">Home</a>
+                <a href="orders.html" class="navbar__cta">Order Now</a>
+            </div>
+            <button class="menu-close" id="menuClose">×</button>
+        </div>
+    </nav>
+
+    <section class="thankyou">
+        <div class="thankyou__container">
+            <div class="thankyou__icon">✓</div>
+            <h1 class="thankyou__title">Thank You!</h1>
+            <p class="thankyou__message">Your order has been successfully submitted.</p>
+            <p class="thankyou__submessage">We've received your request and will be in touch with you shortly to confirm the details and schedule your photography session.</p>
+
+            <div class="thankyou__card">
+                <h3>What Happens Next?</h3>
+                <p>Our team will review your order and contact you within 24 hours to discuss scheduling, specific requirements, and answer any questions you may have. We look forward to capturing stunning images of your property!</p>
+            </div>
+
+            <div class="thankyou__actions">
+                <a href="index.html" class="thankyou__button thankyou__button--primary">Return to Home</a>
+                <a href="orders.html" class="thankyou__button thankyou__button--secondary">Place Another Order</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="contact__container">
+            <h2>Questions?</h2>
+            <p>Feel free to reach out to us anytime</p>
+            <div class="contact__links">
+                <a href="https://www.instagram.com/the_360_pictues/" target="_blank" class="contact__link">
+                    <img src="images/instagramfinal.png" alt="Instagram">
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com" target="_blank" class="contact__link">
+                    <img src="images/facebooklogo.webp" alt="Facebook">
+                    <span>Facebook</span>
+                </a>
+                <a href="mailto:pic360r3alestate@gmail.com" class="contact__link">
+                    <img src="images/email-envelope-white-icon.webp" alt="Email">
+                    <span>Email</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const menuClose = document.getElementById('menuClose');
+
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+            const spans = menuToggle.querySelectorAll('span');
+            const isActive = navMenu.classList.contains('active');
+            spans[0].style.transform = isActive ? 'rotate(45deg) translateY(8px)' : '';
+            spans[1].style.opacity = isActive ? '0' : '1';
+            spans[2].style.transform = isActive ? 'rotate(-45deg) translateY(-8px)' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuClose.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.navbar__menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
