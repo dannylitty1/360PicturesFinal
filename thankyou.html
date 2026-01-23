@@ -151,6 +151,10 @@
             border-radius: 3px;
         }
 
+        .menu-toggle.active {
+            display: none;
+        }
+
         .menu-close {
             display: none;
             position: absolute;
@@ -172,7 +176,7 @@
 
         .menu-close:hover {
             background: var(--navy-secondary);
-            transform: rotate(90deg);
+            transform: translateY(-2px);
         }
 
         /* Thank You Section */
@@ -538,6 +542,7 @@
 
         function toggleMenu() {
             navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
             const spans = menuToggle.querySelectorAll('span');
             const isActive = navMenu.classList.contains('active');
             spans[0].style.transform = isActive ? 'rotate(45deg) translateY(8px)' : '';
@@ -555,6 +560,18 @@
                     toggleMenu();
                 }
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active')) {
+                // Check if click is outside menu, toggle button, and close button
+                if (!navMenu.contains(e.target) &&
+                    !menuToggle.contains(e.target) &&
+                    !menuClose.contains(e.target)) {
+                    toggleMenu();
+                }
+            }
         });
     </script>
 </body>
